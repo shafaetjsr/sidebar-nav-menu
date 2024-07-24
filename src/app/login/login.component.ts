@@ -1,37 +1,46 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginDto } from '../core/classes/LoginDto.model';
+import { LoginServiceService } from '../core/service/login-service.service';
+import { ApiResponseModel } from '../core/classes/ApiResponse.model';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,HttpClientModule],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  loginObj:Login;
-  constructor(private http:HttpClient,private router:Router){
-    this.loginObj = new Login();
+  loginObj:LoginDto =new LoginDto();
+  constructor(private router:Router,private loginSrv:LoginServiceService){
+    
   }
 
   onLogin()
   {
-    if(this.loginObj.emailId=='a' && this.loginObj.password =='a')
-    {
-      this.router.navigateByUrl('dashboard');
-    }
+    this.loginSrv.doLogin(this.loginObj).subscribe((res:ApiResponseModel)=>{
+      if(res.vCode=="1")
+      {
+        localStorage.setItem("token",res.data.token);
+        localStorage.setItem("user",res.data.user);
+        this.router.navigateByUrl('dashboard');
+      }else{
+        alert(res.vMsg)
+      }
+    },error=>{
+      alert(JSON.stringify(error))
+    });
+    // if(this.loginObj.emailId=='a' && this.loginObj.password =='a')
+    // {
+    //   this.router.navigateByUrl('dashboard');
+    // }
   }
 
 }
 
-export class Login{
-  emailId:string;
-  password:string;
-  constructor(){
-    this.emailId='';
-    this.password='';
-  }
-}
+
+
