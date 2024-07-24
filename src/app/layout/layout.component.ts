@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -11,7 +11,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class LayoutComponent  implements OnInit, AfterViewInit {
   sidebarExpanded = false;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private el: ElementRef,private route:Router) {}
 
   ngOnInit(): void {
     // Initialization logic that should run on component initialization
@@ -34,5 +34,11 @@ export class LayoutComponent  implements OnInit, AfterViewInit {
 
   private initializeSidebar(): void {
     // Optionally, you can handle initial sidebar state here if needed
+  }
+
+  doLogOut(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    this.route.navigateByUrl('login');
   }
 }

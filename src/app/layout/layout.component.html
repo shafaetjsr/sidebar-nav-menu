@@ -29,7 +29,7 @@
                 </a>
                 <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a routerLink="/barnd" class="sidebar-link">Brand</a>
+                        <a routerLink="/brand" class="sidebar-link">Brand</a>
                     </li>
                     <li class="sidebar-item">
                         <a routerLink="/product" class="sidebar-link">Product</a>
@@ -76,9 +76,9 @@
             </li>
         </ul>
         <div class="sidebar-footer">
-            <a href="#" class="sidebar-link">
+            <a class="sidebar-link mouse">
                 <i class="lni lni-exit"></i>
-                <span>Logout</span>
+                <span (click)="doLogOut()">Logout</span>
             </a>
         </div>
     </aside>

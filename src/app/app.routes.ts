@@ -8,6 +8,7 @@ import { BrandsComponent } from './master-data/brands/brands.component';
 import { Component } from '@angular/core';
 import { ProductComponent } from './master-data/product/product.component';
 import { ModelComponent } from './master-data/model/model.component';
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -21,10 +22,11 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate:[authGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      {path:'barnd',component:BrandsComponent},
+      {path:'brand',component:BrandsComponent},
       {path:"product",component:ProductComponent},
       {path:'model',component:ModelComponent}
     ]
