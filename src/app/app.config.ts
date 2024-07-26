@@ -8,6 +8,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { TokenInterceptorService } from './core/service/interceptor/token-interceptor.service';
+import { errorInterceptor } from './core/service/interceptor/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +19,10 @@ export const appConfig: ApplicationConfig = {
       useClass: TokenInterceptorService,
       multi: true,
     },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useFactory: errorInterceptor,
+    //   multi: true,
+    // },
   ],
 };

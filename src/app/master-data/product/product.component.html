@@ -1,1 +1,60 @@
-<p>product works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card mt-4">
+          <div class="card-body">
+            <form>
+              <div class="row g-3">
+                <div class="col-md-3">
+                    <select [(ngModel)]="product.brand_name_id" name="brand_name_id" class="form-select" aria-label="Default select example">
+                        <option value="" disabled selected>Please Select Brand</option>
+                        <option *ngFor="let brand of brands" [ngValue]="brand.id">{{ brand.brand_name }}</option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="productType" class="visually-hidden">Product Type</label>
+                  <input type="text" [(ngModel)]="product.product_type" class="form-control" id="productType"
+                    name="productType" placeholder="Product Type" required minlength="3">
+                </div>
+                <div class="col-auto" *ngIf="showSaveBtn">
+                  <button type="button" class="btn btn-primary mb-3" (click)="doSave()">Save</button>
+                </div>
+                <div class="col-auto" *ngIf="!showSaveBtn">
+                  <button type="button" class="btn btn-primary mb-3" (click)="doUpdate()">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+  
+        <div class="card mt-4">
+          <div class="card-body">
+            <div class="col-md-12">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl/No</th>
+                    <th scope="col">Brand Name</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of products; let i = index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{product.brand_name}}</td>
+                    <td>{{product.product_type}}</td>
+                    <td>
+                      <button type="button" class="btn btn-success btn-sm" (click)="doEdit(product)">Edit</button>
+                      <button type="button" class="btn btn-danger btn-sm" (click)="doDelete(product)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

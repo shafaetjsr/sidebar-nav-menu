@@ -1,1 +1,64 @@
-<p>model works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="card mt-4">
+          <div class="card-body">
+            <form>
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <select [(ngModel)]="modelObj.product_brand_id" name="brand_id" class="form-select" (change)="onBrandChange($event)">
+                    <option selected>Select Brand</option>
+                    <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.brand_name }}</option>
+                </select>
+                </div>
+                <div class="col-md-3">
+                  <select [(ngModel)]="modelObj.product_type_id"  name="Product_Typ" class="form-select"
+                    aria-label="Select Product Type">
+                    <option selected>Select Product Type</option>
+                    <option *ngFor="let product of products" [ngValue]="product.id">{{ product.product_type }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label for="productName" class="visually-hidden">Product Name</label>
+                  <input type="text"[(ngModel)]="modelObj.product_model"  class="form-control" id="productName"
+                    name="productName" placeholder="Product Name" required minlength="3">
+                </div>
+                <div class="col-auto">
+                  <button type="button" class="btn btn-primary mb-3" (click)="doSave()">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <div class="card-body">
+            <div class="col-md-12">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl/No</th>
+                    <th scope="col">Product Type</th>
+                    <th>Model</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let model of models;let i=index;">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{model.product_type}}</td>
+                    <td>{{model.product_model}}</td>
+                    <td>
+                      <!-- <button type="button" class="btn btn-success btn-sm" (click)="doEdit(model)">Edit</button> -->
+                      <button type="button" class="btn btn-danger btn-sm" (click)="doDelete(model)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
